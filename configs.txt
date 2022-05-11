@@ -1,0 +1,6 @@
+.users {
+    _id: <id gerada pelo mongo>
+    name: <nome da pessoa>
+    email: <email da pessoa>
+    password: <hash da senha>
+}
