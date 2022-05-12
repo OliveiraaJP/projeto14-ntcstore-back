@@ -1,0 +1,10 @@
+MONGO_URI=""
+MONGO_DB=""
+PORT=""
+
+Exemplo formato de jersey:
+{
+    name: "Vasco",
+    img: "https://i.ibb.co/dM4fSKn/vasco.jpg",
+    price: 139.90
+}

@@ -4,7 +4,6 @@ import dotenv from 'dotenv'
 
 //Routes
 
-
 dotenv.config()
 import router from './routes/index.js'
 
