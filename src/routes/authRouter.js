@@ -1,9 +1,12 @@
-import { Router } from 'express';
+import { Router } from "express";
+import { signUp, postSignIn } from "../controllers/authController.js";
 
-import { postSignIn } from '../controllers/authController.js';
+import validSignUp from "../middlewares/signUpMiddleware.js";
 import { signInMiddleware } from '../middlewares/signInMiddleware.js';
 
-const authRouter = Router()
+const authRouter = Router();
 
+authRouter.post('/signup', validSignUp, signUp);
 authRouter.post('/sign-in', signInMiddleware, postSignIn)
-export default authRouter
+
+export default authRouter;
