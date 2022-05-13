@@ -6,7 +6,7 @@ dotenv.config();
 
 let db;
 const mongoClient = new MongoClient(process.env.MONGO_URI);
-console.log(process.env.MONGO_DB);
+//console.log(process.env.MONGO_DB);
 
 try {
 	await mongoClient.connect();
