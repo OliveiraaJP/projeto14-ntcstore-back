@@ -38,3 +38,22 @@ export const postSignIn = async (req, res) => {
     res.sendStatus(500);
   }
 };
+
+export const postAutoLogin = async (req, res) => {
+  try {
+    const { user } = res.locals
+    res.status(200).send(user.name);
+  } catch {
+    res.sendStatus(500)
+  }
+}
+
+export const deleteSession = async (req, res) => {
+  try {
+    const { session } = res.locals
+    await db.collection('sessions').deleteOne(session)
+    res.sendStatus(200);
+  } catch {
+    res.sendStatus(500)
+  }
+}
