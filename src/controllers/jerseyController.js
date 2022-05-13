@@ -2,7 +2,6 @@ import db from "../db.js";
 
 export const getJerseys = async (req, res) => {
     try {
-        //const { user } = res.locals
         const jerseys = await db.collection('jerseys').find({}).toArray()
         res.status(200).send(jerseys)
     } catch {
