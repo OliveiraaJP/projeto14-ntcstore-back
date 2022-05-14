@@ -25,3 +25,16 @@ export const getCart = async (req, res) => {
         console.log("error get cart" + error);
     }
 }
+
+export const deleteCart = async (req, res) => {
+    const {name: jerseyName} = req.body
+    const {user} = res.locals
+
+    try {
+        await db.collection('users').updateOne({name: user.name}, {$pull: {"cart": {name: jerseyName}}})
+        res.sendStatus(200)
+        console.log('deletou');
+    } catch (error) {
+        console.log('delete cart ', error);
+    }
+}
