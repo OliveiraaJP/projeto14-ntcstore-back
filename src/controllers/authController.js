@@ -57,3 +57,35 @@ export const deleteSession = async (req, res) => {
     res.sendStatus(500)
   }
 }
+
+export const postAdmin = async (req, res) => {
+  try {
+    const token = uuid();
+    const { admin } = res.locals;
+    await db.collection("adminSession").insertOne({
+      userId: admin._id,
+      token,
+    });
+    res.send({ token }).status(200);
+  } catch {
+    res.sendStatus(500);
+  }
+};
+
+export const deleteAdminSession = async (req, res) => {
+  try {
+    const { session } = res.locals
+    await db.collection('adminSession').deleteOne(session)
+    res.sendStatus(200);
+  } catch {
+    res.sendStatus(500)
+  }
+}
+
+export const postAutoLoginAdmin = async (req, res) => {
+  try {
+    res.sendStatus(200);
+  } catch {
+    res.sendStatus(500)
+  }
+}
