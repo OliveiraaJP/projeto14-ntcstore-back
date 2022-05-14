@@ -71,3 +71,21 @@ export const postAdmin = async (req, res) => {
     res.sendStatus(500);
   }
 };
+
+export const deleteAdminSession = async (req, res) => {
+  try {
+    const { session } = res.locals
+    await db.collection('adminSession').deleteOne(session)
+    res.sendStatus(200);
+  } catch {
+    res.sendStatus(500)
+  }
+}
+
+export const postAutoLoginAdmin = async (req, res) => {
+  try {
+    res.sendStatus(200);
+  } catch {
+    res.sendStatus(500)
+  }
+}
