@@ -9,7 +9,7 @@ export const postCart = async (req, res) => {
         const jerseyID = uuid()
         console.log(req.body);
         const camisa = await db.collection("jerseys").findOne({name});
-        await db.collection("users").update({name: user.name},{$push: {
+        await db.collection("users").updateOne({name: user.name},{$push: {
             cart: {name, price, img, size, id: jerseyID}
         }})
         

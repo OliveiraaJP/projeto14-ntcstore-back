@@ -17,6 +17,7 @@ export async function signUp(req, res) {
       name: name.trim(),
       email: email.trim(),
       password: hashedPassword,
+      cart: []
     });
     res.status(200).send("Usuário criado com sucesso!");
   } catch (error) {
