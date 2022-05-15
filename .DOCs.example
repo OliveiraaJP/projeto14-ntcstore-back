@@ -8,3 +8,7 @@ Exemplo formato de jersey:
     img: "https://i.ibb.co/dM4fSKn/vasco.jpg",
     price: 139.90
 }
+
+MONGO_URI=mongodb+srv://alyson:99409879cel@ntc.038f0.mongodb.net/NTC?retryWrites=true&w=majority
+
+Url para usar no front: https://naotemchuteira.herokuapp.com/
