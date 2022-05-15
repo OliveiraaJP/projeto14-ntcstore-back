@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import db from "../db.js";
 
 export const getJerseys = async (req, res) => {
@@ -15,5 +16,15 @@ export const postJersey = async (req, res) => {
         res.sendStatus(201)
     } catch {
         res.sendStatus(500)
+    }
+}
+
+export const getJersey = async (req, res) => {
+    try {
+        const { id } = req.params
+        const jersey = await db.collection('jerseys').findOne({ _id: new ObjectId(id) })
+        res.status(200).send(jersey)
+    } catch {
+        res.sendStatus(500);
     }
 }
