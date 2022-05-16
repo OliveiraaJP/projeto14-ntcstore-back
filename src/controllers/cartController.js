@@ -1,14 +1,16 @@
 import db from "../db.js";
+import { v4 as uuid } from "uuid";
 
 export const postCart = async (req, res) => {
     const {name, price, img, size} = req.body;
     const { user } = res.locals
 
     try {
+        const jerseyID = uuid()
         console.log(req.body);
         const camisa = await db.collection("jerseys").findOne({name});
-        await db.collection("users").update({name: user.name},{$push: {
-            cart: {name, price, img, size}
+        await db.collection("users").updateOne({name: user.name},{$push: {
+            cart: {name, price, img, size, id: jerseyID}
         }})
         
     } catch (error) {
@@ -27,11 +29,12 @@ export const getCart = async (req, res) => {
 }
 
 export const deleteCart = async (req, res) => {
-    const {name: jerseyName} = req.body
+    const {id: jerseyId} = req.body
     const {user} = res.locals
 
     try {
-        await db.collection('users').updateOne({name: user.name}, {$pull: {"cart": {name: jerseyName}}})
+        const jersey = await db.collection('users').findOne()
+        await db.collection('users').updateOne({name: user.name}, {$pull: {"cart": {id: jerseyId}}})
         res.sendStatus(200)
         console.log('deletou');
     } catch (error) {
