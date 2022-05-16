@@ -1,6 +1,9 @@
 import db from "../db.js";
 import bcrypt from "bcrypt";
-import { v4 as uuid } from "uuid";
+//import { v4 as uuid } from "uuid";
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv'
+dotenv.config()
 
 export async function signUp(req, res) {
   const { password, name, email } = req.body;
@@ -27,8 +30,11 @@ export async function signUp(req, res) {
 
 export const postSignIn = async (req, res) => {
   try {
-    const token = uuid();
     const { user } = res.locals;
+    const secretKey = process.env.JWT_SECRET;
+    //const configs = { expiresIn: 60*60*24*30 } // 30 dias em segundos
+    const token = jwt.sign(user, secretKey/*, configs*/);
+    //const token = uuid();
     await db.collection("sessions").insertOne({
       userId: user._id,
       token,
@@ -60,8 +66,9 @@ export const deleteSession = async (req, res) => {
 
 export const postAdmin = async (req, res) => {
   try {
-    const token = uuid();
     const { admin } = res.locals;
+    const secretKey = process.env.JWT_SECRET;
+    const token = jwt.sign(admin, secretKey);
     await db.collection("adminSession").insertOne({
       userId: admin._id,
       token,
