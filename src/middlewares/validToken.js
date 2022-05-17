@@ -11,8 +11,9 @@ export const validToken = async (req, res, next) => {
             return res.sendStatus(401);
         }
         const secretKey = process.env.JWT_SECRET;
-        const data = jwt.verify(token, secretKey);
-        if (!data) {
+        try {
+            const data = jwt.verify(token, secretKey);
+        } catch {
             return res.sendStatus(401);
         }
         const session = await db.collection('sessions').findOne({ token })

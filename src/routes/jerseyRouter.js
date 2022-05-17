@@ -8,6 +8,7 @@ const jerseyRouter = Router()
 
 jerseyRouter.get('/jerseys', validToken, getJerseys)
 jerseyRouter.post('/jerseys', validAdminToken, jerseyMiddleware, postJersey)
-jerseyRouter.get('/jersey/:id', validToken, getJersey)
+jerseyRouter.get('/jersey/:id', getJersey)
+jerseyRouter.get('/jerseys-homepage', getJerseys)
 
 export default jerseyRouter

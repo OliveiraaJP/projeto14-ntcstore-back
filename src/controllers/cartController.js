@@ -14,6 +14,7 @@ export const postCart = async (req, res) => {
                 cart: { name, price, img, size, qty: 1, id: jerseyID }
             }
         })
+        res.sendStatus(200)
 
     } catch (error) {
         console.log("post cart", error);
